@@ -4,14 +4,29 @@
 
 void ATankPlayerController::BeginPlay() {
 	Super::BeginPlay();
+	
+	FindPlayerControlledTank();
 
-	if (!GetPlayerControlledTank())
+	if (!PlayerControlledTank)
 	{
 		UE_LOG(LogTemp, Error, TEXT("Tank Player Controller Started. Error: Possesed Tank IS NULL"));
 	}
 }
 
-ATank* ATankPlayerController::GetPlayerControlledTank() const {
-	return Cast<ATank>(GetPawn());
+void ATankPlayerController::Tick(float DeltaTime) {
+	Super::Tick(DeltaTime);
+
+	if (PlayerControlledTank)
+	{
+		MoveBarrelTowardsCrosshair();
+	}
+}
+
+void ATankPlayerController::FindPlayerControlledTank() {
+	PlayerControlledTank =  Cast<ATank>(GetPawn());
+}
+
+void ATankPlayerController::MoveBarrelTowardsCrosshair() {
+	return;
 }
 
