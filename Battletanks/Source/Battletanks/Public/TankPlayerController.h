@@ -18,6 +18,14 @@ class BATTLETANKS_API ATankPlayerController : public APlayerController
 private:
 	ATank* PlayerControlledTank;
 
+	//Will need To update UI BluePrint as well if these 
+	//reticle values change. Blueprint doesn't read these values!
+	UPROPERTY(EditAnywhere)
+	float ReticleXLocationRelativeToScreen = 0.5;
+
+	UPROPERTY(EditAnywhere)
+	float ReticleYLocationRelativeToScreen = 0.33333333;
+
 	void FindPlayerControlledTank();
 	
 	void BeginPlay() override;
@@ -25,5 +33,6 @@ private:
 	void Tick(float DeltaTime) override;
 
 	void MoveBarrelTowardsCrosshair();
-	
+
+	bool GetReticleRayHitLocation(FVector& RayHitLocation) const;
 };
