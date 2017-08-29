@@ -26,6 +26,9 @@ private:
 	UPROPERTY(EditAnywhere)
 	float ReticleYLocationRelativeToScreen = 0.33333333;
 
+	UPROPERTY(EditAnywhere)
+	float ReticleRayMagnitude = 100000; //12KM
+
 	void FindPlayerControlledTank();
 	
 	void BeginPlay() override;
@@ -35,4 +38,6 @@ private:
 	void MoveBarrelTowardsCrosshair();
 
 	bool GetReticleRayHitLocation(FVector& RayHitLocation) const;
+
+	bool GetUserLookDirection(FVector& WorldLocation, FVector& WorldDirection) const;
 };
