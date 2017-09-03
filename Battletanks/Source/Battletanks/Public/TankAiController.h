@@ -16,9 +16,9 @@ class BATTLETANKS_API ATankAiController : public AAIController
 	GENERATED_BODY()
 
 private:
-	ATank* PlayerControlledTank;
+	ATank* PlayerControlledTank = nullptr;
 
-	ATank* PosessedTank;
+	ATank* PosessedTank = nullptr;;
 
 	ATank* GetPossessedTank() const;
 
