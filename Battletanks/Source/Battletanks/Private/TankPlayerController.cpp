@@ -35,8 +35,7 @@ void ATankPlayerController::MoveBarrelTowardsCrosshair() {
 	FVector RayHitLocation = FVector();
 	if (GetReticleRayHitLocation(RayHitLocation))
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Tank Player Controller. Hit Location X = %f, Y = %f, Z = %f"), RayHitLocation.X, RayHitLocation.Y, RayHitLocation.Z);
-
+		PlayerControlledTank->AimBarrelAt(RayHitLocation);
 	}
 }
 

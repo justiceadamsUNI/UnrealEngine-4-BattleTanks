@@ -1,20 +1,41 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "TankAiController.h"
+#include "Classes/Engine/World.h"
 #include "GameFramework/Actor.h"
 #include "GameFramework/PlayerController.h"
 #include "GameFramework/Pawn.h"
 
 void ATankAiController::BeginPlay() {
-	if (!GetPossessedTank())
+	Super::BeginPlay();
+
+	PlayerControlledTank = GetPlayerControlledTank();
+	PosessedTank = GetPossessedTank();
+
+	if (!PlayerControlledTank)
+	{
+		UE_LOG(LogTemp, Error, TEXT("Tank AI Controller Started. Player Controlled Tank Is NULL"));
+	}
+
+	if (!PosessedTank)
 	{
 		UE_LOG(LogTemp, Error, TEXT("Tank AI Controller Started. Error: Possesed Tank IS NULL"));
 	}
+}
 
-	if (GetPlayerControlledTank())
+void ATankAiController::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+
+	if (PlayerControlledTank && PosessedTank)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Tank AI Controller Started. Player Pawn is : %s"), *GetPlayerControlledTank()->GetName());
+		MoveBarrelTowardsPlayer();
 	}
+}
+
+void ATankAiController::MoveBarrelTowardsPlayer()
+{
+	PosessedTank->AimBarrelAt(PlayerControlledTank->GetActorLocation());
 }
 
 ATank* ATankAiController::GetPossessedTank() const {

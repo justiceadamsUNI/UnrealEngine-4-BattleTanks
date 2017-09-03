@@ -27,7 +27,7 @@ private:
 	float ReticleYLocationRelativeToScreen = 0.33333333;
 
 	UPROPERTY(EditAnywhere)
-	float ReticleRayMagnitude = 100000; //12KM
+	float ReticleRayMagnitude = 100000; //1KM
 
 	void FindPlayerControlledTank();
 	

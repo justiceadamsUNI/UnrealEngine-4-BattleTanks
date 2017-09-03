@@ -11,6 +11,12 @@ ATank::ATank()
 
 }
 
+void ATank::AimBarrelAt(FVector HitLocation)
+{
+	// Write code to actually move barrel
+	UE_LOG(LogTemp, Warning, TEXT("Tank %s Looking at - Hit Location X = %f, Y = %f, Z = %f"), *GetName(), HitLocation.X, HitLocation.Y, HitLocation.Z);
+}
+
 // Called when the game starts or when spawned
 void ATank::BeginPlay()
 {
