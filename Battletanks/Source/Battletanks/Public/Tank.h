@@ -14,6 +14,10 @@ class BATTLETANKS_API ATank : public APawn
 
 public:
 	// Sets default values for this pawn's properties
+
+	UPROPERTY(EditAnywhere, Category = Firing)
+	float LaunchSpeed = 1000000; // 1000 meters a second.
+
 	ATank();
 
 	UFUNCTION(BlueprintCallable)

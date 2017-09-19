@@ -2,8 +2,9 @@
 
 #include "TankAimingComponent.h"
 #include "Classes/Components/StaticMeshComponent.h"
+#include "Classes/Kismet/GameplayStatics.h"
 
-
+#define MUTATE
 
 // Sets default values for this component's properties
 UTankAimingComponent::UTankAimingComponent()
@@ -36,9 +37,19 @@ void UTankAimingComponent::SetBarrelReference(UStaticMeshComponent * Barrel)
 	this->Barrel = Barrel;
 }
 
-void UTankAimingComponent::AimAtLocation(FVector Location)
+void UTankAimingComponent::AimAtLocation(FVector Location, float LaunchSpeed)
 {
-	auto BarrelLocation = Barrel->GetComponentLocation();
-	UE_LOG(LogTemp, Warning, TEXT("Tank %s Looking at - Hit Location X = %f, Y = %f, Z = %f.... Barrel Location is %s"), *(GetOwner()->GetName()), Location.X, Location.Y, Location.Z, *BarrelLocation.ToString());
+	if (!Barrel)
+	{
+		UE_LOG(LogTemp, Error, TEXT("TankAimingComponent - Barrel Is NULL"));
+		return;
+	}
+	
+	FVector ProjectiveVelocity;
+	FVector StartLocation;
+	FVector BarrelEndLocation = Barrel->GetSocketLocation("EndOfBarrelSocket"); //Will default to component location if fails.
+
+	UGameplayStatics::SuggestProjectileVelocity(this, MUTATE ProjectiveVelocity, BarrelEndLocation, Location, false, 0, 0, ESuggestProjVelocityTraceOption::DoNotTrace);
+
 }
 

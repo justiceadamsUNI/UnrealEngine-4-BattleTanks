@@ -31,7 +31,7 @@ void ATank::SetBarrelReference(UStaticMeshComponent* Barrel)
 void ATank::AimBarrelAt(FVector HitLocation)
 {
 	// Write code to actually move barrel
-	TankAimingComponent->AimAtLocation(HitLocation);
+	TankAimingComponent->AimAtLocation(HitLocation, LaunchSpeed);
 }
 
 // Called to bind functionality to input
